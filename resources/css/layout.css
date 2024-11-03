@@ -1,0 +1,137 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #f8f9fa;
+}
+
+nav {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+#sidebar {
+    min-height: calc(100vh - 48px);
+    width: 250px;
+    background-color: white;
+    position: fixed;
+    top: 48px;
+    z-index: 2;
+}
+
+.content {
+    margin-left: 250px;
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    z-index: 1;
+    background:#F0F2F5;
+}
+
+.title-content {
+    height: 106px;
+    display: flex;
+    background: white;
+    padding-left: 25px;
+}
+
+.slider {
+    flex-grow: 1;
+}
+
+.nav-link {
+    color: #000;
+}
+
+.nav-link i {
+    color: #000;
+}
+
+.nav-link:hover {
+    color: #1890FF;
+    background-color: #e6f7ff;
+    border-radius: 4px;
+}
+
+.nav-link:hover i {
+    color: #1890FF;
+}
+
+.breadcrumb-text .breadcrumb-previous {
+    color: #888;
+}
+
+.breadcrumb-text .breadcrumb-current {
+    color: #000000D9;
+    font-weight: bold;
+}
+
+.title-primary {
+    color: #000000D9;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+.nav-link, .collapse .nav-link {
+    width: 100%;
+    display: block;
+    padding-left: 1.5rem;
+}
+
+.collapse .nav-link {
+    padding-left: 2.5rem;
+}
+
+button.nav-link {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+button.nav-link .ms-auto {
+    margin-left: auto;
+}
+
+.rotate-icon {
+    transition: transform 0.3s ease;
+}
+
+.rotate-icon[aria-expanded="true"] {
+    transform: rotate(180deg);
+}
+
+.label-color {
+    color: #00000073
+}
+
+.required-color {
+    color: #FF4D4F
+}
+
+.information {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #000000D9;
+}
+
+.input-text {
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+    height: 40px;
+}
+
+.btn-clear {
+    border: #1890FF 1px solid;
+    color: #1890FF;
+}
+
+.blue-color
+{
+    color: #1890FF;
+}
