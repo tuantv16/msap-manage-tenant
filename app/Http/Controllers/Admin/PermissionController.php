@@ -21,7 +21,6 @@ class PermissionController extends Controller
     {
         $params = $request->all();
         $permissions = $this->permissionService->search($params);
-
         return view('admin.manages.permissions.index', compact('permissions'));
     }
 
@@ -38,9 +37,8 @@ class PermissionController extends Controller
     public function store(PermissionRequest $request) {
         try {
             $params = $request->validated();
-
             $this->permissionService->save($params);
-            return redirect()->back()->with('success', 'Permission created successfully.');
+            return redirect()->route('admin.permissions.index')->with('success', 'Permission updated successfully.');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
@@ -48,6 +46,12 @@ class PermissionController extends Controller
         }
     }
 
+     /**
+     * edit permission
+     *
+     * @param [int] $id
+     * @return void
+     */
     public function edit($id) {
         $permission = $this->permissionService->findById($id);
         return view('admin.manages.permissions.edit', compact('permission'));
@@ -65,7 +69,7 @@ class PermissionController extends Controller
         try {
             $params = $request->validated();
             $this->permissionService->update($id, $params);
-            return redirect()->back()->with('success', 'Permission updated successfully.');
+            return redirect()->route('admin.permissions.index')->with('success', 'Permission updated successfully.');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {
@@ -83,7 +87,7 @@ class PermissionController extends Controller
     {
         try {
             $permission = $this->permissionService->findById($id);
-            return view('admin.permissions.show', compact('permission'));
+            return view('admin.manages.permissions.show', compact('permission'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -95,10 +99,11 @@ class PermissionController extends Controller
      * @param [int] $id
      * @return void
      */
-    public function delete($id)
+    public function destroy($id)
     {
         try {
-            return $this->permissionService->delete($id);
+            $this->permissionService->delete($id);
+            return redirect()->route('admin.permissions.index')->with('success', 'Permission delete successfully.');
         } catch (ValidationException $e) {
             return redirect()->back()->withErrors($e->errors())->withInput();
         } catch (\Exception $e) {

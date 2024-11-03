@@ -27,11 +27,15 @@ class RoleRequest extends FormRequest
             return [
                 'name' => 'required|string|max:255|unique:roles,name',
                 'description' => 'nullable|string',
+                'permissions' => 'required|array',
+                'permissions.*' => 'exists:permissions,id'
             ];
         } elseif (in_array($method, ['PUT', 'PATCH'])) {
             return [
                 'name' => 'required|string|max:255|unique:roles,name,' . $this->route('id'),
                 'description' => 'nullable|string',
+                'permissions' => 'required|array',
+                'permissions.*' => 'exists:permissions,id'
             ];
         }
 

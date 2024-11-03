@@ -13,6 +13,7 @@ export default defineConfig({
                 'resources/js/tenant.js',
                 'resources/js/chart_custom.js',
                 'resources/js/paymentMethod.js',
+                'resources/roles/role.js',
             ],
             refresh: true,
         }),

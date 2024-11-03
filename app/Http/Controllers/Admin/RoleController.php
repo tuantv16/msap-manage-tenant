@@ -18,7 +18,9 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('admin.manages.roles.form');
+
+        $data = $this->roleService->initData();
+        return view('admin.manages.roles.create', compact('data'));
     }
 
     /**
@@ -83,7 +85,7 @@ class RoleController extends Controller
      * @param [int] $id
      * @return void
      */
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             return $this->roleService->delete($id);

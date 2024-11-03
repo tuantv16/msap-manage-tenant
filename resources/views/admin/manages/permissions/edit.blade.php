@@ -6,13 +6,13 @@
     </x-slot>
 
     <div class="">
-        @include('layouts.header', ['breadcrumb' => 'Home / Permission', 'title' => 'Permission'])
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endif
+      
+        @include('layouts.header', [
+            'breadcrumb' => 'EXV / Master / Permission',
+            'title' => 'Permission',
+            'backLink' => route('admin.permissions.index')
+        ])
+
     </div>
 
     <div class="p-4">
@@ -58,14 +58,15 @@
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                        </div> 
+                    </div>
 
-                             <!-- Adjusted Button alignment -->
-                            <div class="flex justify-end mt-6">
-                                <a href="{{ route('admin.permissions.index') }}" class="btn btn-secondary mr-3">Cancel</a>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
+                    <div class="space-y-8">
+                        <!-- Adjusted Button alignment -->
+                        <div class="flex justify-end mt-6" style="padding-right:25px">
+                            <a href="{{ route('admin.permissions.index') }}" class="btn btn-secondary mr-3">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
-                        
                     </div>
                 </form>
             </div>

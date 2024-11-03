@@ -26,17 +26,30 @@ class PermissionRepository extends BaseRepositoryEloquent implements PermissionR
         return $this->model->where('name', $name)->first();
     }
 
-    public function search($params) {
+    /**
+     * searchPermission function
+     *
+     * @param [array] $params
+     * @return collection
+     */
+    public function search($params)
+    {
+        $limit = !empty($params['per_page']) ? intval($params['per_page']) : self::PAGINATION_LIMIT;
+
         $query = $this->model->query();
 
-        if (!empty($params['name'])) {
-            $query->where('name', 'LIKE', "%{$params['name']}%");
-        }
-    
-        if (!empty($params['description'])) {
-            $query->where('description', 'LIKE', "%{$params['description']}%");
-        }
+        $query->when(!empty($params['permission_id']), function ($q) use ($params) {
+            $q->where('id', $params['permission_id']);
+        });
 
-        return $this->paginate(20);
+        $query->when(!empty($params['name']), function ($q) use ($params) {
+            $q->where('name', 'LIKE', "%{$params['name']}%");
+        });
+
+        $query->when(!empty($params['description']), function ($q) use ($params) {
+            $q->where('description', 'LIKE', "%{$params['description']}%");
+        });
+
+        return $query->paginate($limit);
     }
 }

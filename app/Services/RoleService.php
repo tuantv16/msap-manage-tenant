@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Repositories\Permissions\PermissionRepository;
 use App\Repositories\Permissions\PermissionRepositoryInterface;
 use App\Repositories\Roles\RoleRepositoryInterface;
 use Illuminate\Validation\ValidationException;
@@ -9,11 +10,31 @@ use Illuminate\Validation\ValidationException;
 class RoleService extends BaseService
 {
     protected $roleRepository;
-    public function __construct(RoleRepositoryInterface $roleRepository)
+    protected $permissionRepository;
+
+    public function __construct(RoleRepositoryInterface $roleRepository, PermissionRepository $permissionRepository)
     {
         $this->roleRepository = $roleRepository;
+        $this->permissionRepository = $permissionRepository;
     }
     
+     
+     /**
+     * init data function
+     *
+     * @param 
+     * @return
+     */
+    public function initData() {
+        // get list permission
+        $permissions = $this->permissionRepository->all();
+
+        // get ...
+        return [
+           'permissions' => $permissions 
+        ];
+    }
+
      /**
      * create new permission function
      *
@@ -28,7 +49,13 @@ class RoleService extends BaseService
             ]);
         }
         
-        return $this->roleRepository->create($params);
+        // transaction ở đây (chưa code)
+        $role = $this->roleRepository->create($params);
+    
+        // set permissions in role
+        $role->permissions()->sync($params['permissions']);
+
+        return [];
 
     }
 

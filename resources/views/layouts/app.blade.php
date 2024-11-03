@@ -20,6 +20,13 @@
     <script src="{{ asset('scripts/chart.js') }}"></script>
     <script src="{{ asset('scripts/chartjs_plugin_datalabels.js') }}"></script>
 
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
     @vite(['resources/css/app.css','resources/css/chart_custom.css', 'resources/css/layout.css', 'resources/js/app.js', 'resources/js/chart_custom.js'])
 
 </head>
